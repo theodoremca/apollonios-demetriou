@@ -1,0 +1,20 @@
+{
+  "name": "asset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  
+  "scripts": {
+    "deploy": "git add . && git commit -m 'ghhghg' && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theodoremca/apollonios-demetriou.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theodoremca/apollonios-demetriou/issues"
+  },
+  "homepage": "https://github.com/theodoremca/apollonios-demetriou#readme"
+}
