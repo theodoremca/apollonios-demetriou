@@ -83,9 +83,7 @@ const fetchSomething = async () => {
 
       submitBtn.innerHTML = "Submited";
       this.form = {};
-      new Promise((resolve) =>
-        setTimeout(resolve, 2000)
-      ).then((data) => {
+      new Promise((resolve) => setTimeout(resolve, 2000)).then((data) => {
         submitBtn.innerHTML = "Generate Cover Letter";
       });
     })
@@ -93,9 +91,7 @@ const fetchSomething = async () => {
       console.log({ e });
 
       form = {};
-      new Promise((resolve) =>
-        setTimeout(resolve, 2000)
-      ).then((data) => {
+      new Promise((resolve) => setTimeout(resolve, 2000)).then((data) => {
         containers[0].style.display = "none";
         containers[1].style.display = "none";
         containers[2].style.display = "block";
@@ -103,11 +99,103 @@ const fetchSomething = async () => {
       });
     });
 };
+
+function ValidateEmail(input) {
+  var validRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (input.match(validRegex)) {
+    return true;
+  }
+  return false;
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 const copyLetterBtn = document.querySelector("#copy-letter"),
-  saveLetterBtn = document.querySelector(".save-letter");
+  saveLetterBtn = document.querySelector("#save-letter"),
+  emailError = document.querySelector("#email-error"),
+  letterEmail = document.querySelector("#letter-email");
 copyLetterBtn.addEventListener("click", copyLetter);
+saveLetterBtn.addEventListener("click", saveLetterModal);
+letterEmail.addEventListener("input",()=>{
+  emailError.style.display = "none"
+})
 
 function copyLetter() {
   navigator.clipboard.writeText(result.innerHTML);
   alert("Copied");
+}
+
+var modalCuver = document.getElementById("mymodalCuver");
+var BtnCuver = document.getElementById("myBtnCuver");
+var span = document.getElementsByClassName("closeCuver")[0];
+function saveLetterModal() {
+  modalCuver.style.display = "block";
+  letterEmail.value= getCookie("letterEmail")
+}
+span.onclick = function () {
+  modalCuver.style.display = "none";
+};
+window.onclick = function (event) {
+  if (event.target == modalCuver) {
+    modalCuver.style.display = "none";
+  }
+};
+
+BtnCuver.addEventListener("click", saveLetter);
+async function saveLetter() {
+  const emailValue = letterEmail.value;
+  if (!ValidateEmail(emailValue)) return emailError.style.display = "block";
+  document.cookie = "letterEmail" + "=" + emailValue;
+  console.log({ yes: result.innerHTML });
+  containers[0].style.display = "none";
+  containers[1].style.display = "none";
+  containers[2].style.display = "none";
+  containers[3].style.display = "block";
+
+  modalCuver.style.display = "none";
+  await axios
+    .post(url2, {
+      letter: result.innerHTML,
+      email: "theodoreimonigie@gmail.com",
+    })
+    .then(({ data }) => {
+      containers[0].style.display = "none";
+      containers[1].style.display = "block";
+      containers[2].style.display = "none";
+      containers[3].style.display = "none";
+      alert("Saved successfully");
+
+      submitBtn.innerHTML = "Submited";
+      this.form = {};
+      new Promise((resolve) => setTimeout(resolve, 2000)).then((data) => {
+        submitBtn.innerHTML = "Generate Cover Letter";
+      });
+    })
+    .catch((e) => {
+      console.log({ e });
+
+      form = {};
+      new Promise((resolve) => setTimeout(resolve, 2000)).then((data) => {
+        containers[0].style.display = "none";
+        containers[1].style.display = "block";
+        containers[2].style.display = "none";
+        containers[3].style.display = "none";
+        submitBtn.innerHTML = "Generate Cover Letter";
+      });
+    });
 }

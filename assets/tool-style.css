@@ -50,3 +50,42 @@
   object-fit: cover;
   border-radius: 5px;
 }
+
+.modalCuver {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* modalCuver Content */
+.modalCuver-content {
+  background-color: transparent;
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+}
+
+/* The closeCuver Button */
+.closeCuver {
+  color: #ffffff;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+ margin-right: -20px;
+ margin-top: -20px;
+}
+
+.closeCuver:hover,
+.closeCuver:focus {
+  color: rgb(238, 233, 233);
+  text-decoration: none;
+  cursor: pointer;
+}
