@@ -171,7 +171,7 @@ async function saveLetter() {
   await axios
     .post(url2, {
       letter: result.innerHTML,
-      email: "theodoreimonigie@gmail.com",
+      email: emailValue,
     })
     .then(({ data }) => {
       containers[0].style.display = "none";
