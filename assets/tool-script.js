@@ -39,8 +39,9 @@ dropArea.addEventListener("drop", (event) => {
 });
 
 function showFile() {
-  let fileType = file.type; //getting selected file type //adding some valid image extensions in array
-  if (fileType.includes("pd")) {
+  let fileType = file.type;
+  let name = file.name; //getting selected file type //adding some valid image extensions in array
+  if (name.includes(".pdf")||name.includes(".doc")||name.includes(".ppt")||name.includes(".xls")) {
     let fileReader = new FileReader(); //creating new FileReader object
     fileReader.onload = () => {
       let fileURL = fileReader.result; //passing user file source in fileURL variable
