@@ -128,17 +128,28 @@ function getCookie(cname) {
 
 const copyLetterBtn = document.querySelector("#copy-letter"),
   saveLetterBtn = document.querySelector("#save-letter"),
+  retryBtn = document.querySelector("#retry"),
   emailError = document.querySelector("#email-error"),
   letterEmail = document.querySelector("#letter-email");
 copyLetterBtn.addEventListener("click", copyLetter);
 saveLetterBtn.addEventListener("click", saveLetterModal);
+retryBtn.addEventListener("click", retry);
 letterEmail.addEventListener("input",()=>{
   emailError.style.display = "none"
 })
 
 function copyLetter() {
-  navigator.clipboard.writeText(result.innerHTML);
-  alert("Copied");
+  // navigator.clipboard.writeText(result.innerHTML);
+  const textCopied = ClipboardJS.copy(result.innerHTML);
+  console.log('copied!', textCopied);
+}
+
+function retry() {
+  // navigator.clipboard.writeText(result.innerHTML);
+  containers[0].style.display = "none";
+  containers[1].style.display = "none";
+  containers[2].style.display = "block";
+  containers[3].style.display = "none";
 }
 
 var modalCuver = document.getElementById("mymodalCuver");
