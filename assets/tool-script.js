@@ -145,7 +145,6 @@ function copyLetter() {
 }
 
 function retry() {
-  // navigator.clipboard.writeText(result.innerHTML);
   containers[0].style.display = "none";
   containers[1].style.display = "none";
   containers[2].style.display = "block";
